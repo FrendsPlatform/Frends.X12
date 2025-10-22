@@ -14,7 +14,7 @@ public class UnitTests
     private static readonly string SampleJson = File.ReadAllText(Path.Combine(TestDataDir, "sample.json"));
 
     private static readonly string ExpectedEdi =
-        File.ReadAllText(Path.Combine(TestDataDir, "expected.edi")).Replace("\r\n", string.Empty);
+        File.ReadAllText(Path.Combine(TestDataDir, "expected.edi")).Replace("\r\n", string.Empty).Replace("\n", string.Empty);
 
     [Test]
     public void Should_Create_EdiString()
