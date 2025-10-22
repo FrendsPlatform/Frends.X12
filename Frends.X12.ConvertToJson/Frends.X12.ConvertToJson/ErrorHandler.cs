@@ -1,7 +1,7 @@
 ﻿using System;
-using Frends.X12.CreateFromJson.Definitions;
+using Frends.X12.ConvertToJson.Definitions;
 
-namespace Frends.X12.CreateFromJson;
+namespace Frends.X12.ConvertToJson;
 
 /// <summary>
 /// Class to handle exceptions returned to Frends
@@ -35,7 +35,7 @@ public static class ErrorHandler
         return new Result
         {
             Success = false,
-            Edi = null,
+            Json = null,
             Error = new Error
             {
                 Message = errorMessage,

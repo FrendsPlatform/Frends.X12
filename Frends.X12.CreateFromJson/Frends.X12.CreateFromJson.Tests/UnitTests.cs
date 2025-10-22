@@ -17,13 +17,11 @@ public class UnitTests
         File.ReadAllText(Path.Combine(TestDataDir, "expected.edi")).Replace("\r\n", string.Empty);
 
     [Test]
-    public void Should_Create_EdiFile()
+    public void Should_Create_EdiString()
     {
-        var input = DefaultInput();
-        input.Json = SampleJson;
-        var result = X12.CreateFromJson(input, DefaultOptions(), CancellationToken.None);
+        var result = X12.CreateFromJson(DefaultInput(), DefaultOptions(), CancellationToken.None);
         Assert.That(result.Success, Is.True);
-        Assert.That(result.Output, Is.EqualTo(ExpectedEdi));
+        Assert.That(result.Edi, Is.EqualTo(ExpectedEdi));
     }
 
     [Test]

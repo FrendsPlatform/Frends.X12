@@ -25,5 +25,5 @@ public class Input
     /// </example>
     [DefaultValue("")]
     [DisplayFormat(DataFormatString = "Text")]
-    public string InputX12 { get; set; } = string.Empty;
+    public string Edi { get; set; } = string.Empty;
 }

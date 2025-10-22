@@ -13,7 +13,7 @@ public class Options
     /// </summary>
     /// <example>false</example>
     [DefaultValue(true)]
-    public bool ThrowErrorOnFailure { get; set; }
+    public bool ThrowErrorOnFailure { get; set; } = true;
 
     /// <summary>
     /// Overrides the error message on failure.
@@ -21,5 +21,5 @@ public class Options
     /// <example>Custom error message</example>
     [DisplayFormat(DataFormatString = "Text")]
     [DefaultValue("")]
-    public string ErrorMessageOnFailure { get; set; }
+    public string ErrorMessageOnFailure { get; set; } = string.Empty;
 }

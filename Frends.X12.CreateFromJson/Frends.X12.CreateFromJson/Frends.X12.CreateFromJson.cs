@@ -12,13 +12,13 @@ namespace Frends.X12.CreateFromJson;
 public static class X12
 {
     /// <summary>
-    /// X12es the input string the specified number of times.
+    /// Creates X12 Edi string from Json.
     /// [Documentation](https://tasks.frends.com/tasks/frends-tasks/Frends-X12-CreateFromJson)
     /// </summary>
     /// <param name="input">Essential parameters.</param>
     /// <param name="options">Additional parameters.</param>
     /// <param name="cancellationToken">A cancellation token provided by Frends Platform.</param>
-    /// <returns>object { bool Success, string Output, object Error { string Message, Exception AdditionalInfo } }</returns>
+    /// <returns>object { bool Success, string Edi, object Error { string Message, Exception AdditionalInfo } }</returns>
     public static Result CreateFromJson(
         [PropertyTab] Input input,
         [PropertyTab] Options options,
@@ -32,7 +32,7 @@ public static class X12
             return new Result
             {
                 Success = true,
-                Output = result,
+                Edi = result,
                 Error = null,
             };
         }

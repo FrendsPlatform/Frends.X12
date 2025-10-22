@@ -26,7 +26,7 @@ public class Result
     /// GE*1*1~
     /// IEA*1*000000001~
     /// </example>
-    public string Output { get; set; }
+    public string Edi { get; set; }
 
     /// <summary>
     /// Error that occurred during task execution.

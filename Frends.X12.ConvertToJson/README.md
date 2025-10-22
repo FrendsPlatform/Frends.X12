@@ -1,6 +1,6 @@
 # Frends.X12.ConvertToJson
 
-Description of what the Task will do.
+Frends task for converting X12 documents to JSON.
 
 [![ConvertToJson_build](https://github.com/FrendsPlatform/Frends.X12/actions/workflows/ConvertToJson_build_and_test_on_main.yml/badge.svg)](https://github.com/FrendsPlatform/Frends.X12/actions/workflows/ConvertToJson_build_and_test_on_main.yml)
 ![Coverage](https://app-github-custom-badges.azurewebsites.net/Badge?key=FrendsPlatform/Frends.X12/Frends.X12.ConvertToJson|main)
