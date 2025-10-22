@@ -10,7 +10,7 @@ public class Error
     /// <summary>
     /// Summary of the error.
     /// </summary>
-    /// <example>Failed to create Edi.</example>
+    /// <example>Failed to convert Edi to Json.</example>
     public string Message { get; set; }
 
     /// <summary>
