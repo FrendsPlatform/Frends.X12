@@ -9,9 +9,8 @@ namespace Frends.X12.CreateFromJson.Definitions;
 public class Input
 {
     /// <summary>
-    /// X12 in JSON format. The JSON format should be the same
-    /// as produced by Frends when converting X12 documents to
-    /// JSON.
+    /// X12 in Json format.
+    /// The Json format should be the same as produced by Frends when converting X12 documents to Json.
     /// </summary>
     /// <example>
     /// {

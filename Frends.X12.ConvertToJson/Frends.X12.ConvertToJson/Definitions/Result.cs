@@ -12,7 +12,7 @@ public class Result
     public bool Success { get; set; }
 
     /// <summary>
-    /// Result of converting Edifact to JSON.
+    /// Result of converting Edifact to Json.
     /// </summary>
     /// <example>
     /// {
