@@ -1,6 +1,6 @@
 # Frends.X12.CreateFromJson
 
-Description of what the Task will do.
+Frends task for creating X12 documents from JSON
 
 [![CreateFromJson_build](https://github.com/FrendsPlatform/Frends.X12/actions/workflows/CreateFromJson_build_and_test_on_main.yml/badge.svg)](https://github.com/FrendsPlatform/Frends.X12/actions/workflows/CreateFromJson_build_and_test_on_main.yml)
 ![Coverage](https://app-github-custom-badges.azurewebsites.net/Badge?key=FrendsPlatform/Frends.X12/Frends.X12.CreateFromJson|main)

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading;
 using Frends.X12.CreateFromJson.Definitions;
@@ -8,191 +9,75 @@ namespace Frends.X12.CreateFromJson.Tests;
 [TestFixture]
 public class UnitTests
 {
-  private const string SampleJson = """
-                                    {
-                                      "X12": {
-                                        "ISA": {
-                                          "AuthorizationInformationQualifier_1": "00",
-                                          "AuthorizationInformation_2": "",
-                                          "SecurityInformationQualifier_3": "00",
-                                          "SecurityInformation_4": "",
-                                          "SenderIDQualifier_5": "12",
-                                          "InterchangeSenderID_6": "SENDERID       ",
-                                          "ReceiverIDQualifier_7": "12",
-                                          "InterchangeReceiverID_8": "RECEIVERID     ",
-                                          "InterchangeDate_9": "250101",
-                                          "InterchangeTime_10": "1253",
-                                          "InterchangeControlStandardsIdentifier_11": "U",
-                                          "InterchangeControlVersionNumber_12": "00401",
-                                          "InterchangeControlNumber_13": "000000001",
-                                          "AcknowledgementRequested_14": "0",
-                                          "UsageIndicator_15": "T",
-                                          "ComponentElementSeparator_16": ">"
-                                        },
-                                        "GS": {
-                                          "CodeIdentifyingInformationType_1": "PO",
-                                          "SenderIDCode_2": "SENDERID",
-                                          "ReceiverIDCode_3": "RECEIVERID",
-                                          "Date_4": "20250101",
-                                          "Time_5": "1253",
-                                          "GroupControlNumber_6": "1",
-                                          "TransactionTypeCode_7": "X",
-                                          "VersionAndRelease_8": "004010"
-                                        },
-                                        "TS850": {
-                                          "ErrorContext": {
-                                            "Name": "850",
-                                            "ControlNumber": "0001",
-                                            "Edition": "004010",
-                                            "Index": "2",
-                                            "ValidatedSegmentsCount": "0",
-                                            "Codes": null,
-                                            "Errors": null,
-                                            "HasErrors": "false"
-                                          },
-                                          "ST": {
-                                            "TransactionSetIdentifierCode_01": "850",
-                                            "TransactionSetControlNumber_02": "0001"
-                                          },
-                                          "BEG": {
-                                            "TransactionSetPurposeCode_01": "00",
-                                            "PurchaseOrderTypeCode_02": "NE",
-                                            "PurchaseOrderNumber_03": "PO123456",
-                                            "Date_05": "20250101"
-                                          },
-                                          "REF": {
-                                            "REF": {
-                                              "ReferenceIdentificationQualifier_01": "IA",
-                                              "ReferenceIdentification_02": "123456"
-                                            }
-                                          },
-                                          "PER": {
-                                            "PER": {
-                                              "ContactFunctionCode_01": "BD",
-                                              "Name_02": "John Buyer",
-                                              "CommunicationNumberQualifier_03": "TE",
-                                              "CommunicationNumber_04": "5551234567"
-                                            }
-                                          },
-                                          "N1Loop": {
-                                            "Loop_N1_850": [
-                                              {
-                                                "N1": {
-                                                  "EntityIdentifierCode_01": "BT",
-                                                  "Name_02": "Buyer Company",
-                                                  "IdentificationCodeQualifier_03": "92",
-                                                  "IdentificationCode_04": "12345"
-                                                },
-                                                "N3": {
-                                                  "N3": {
-                                                    "AddressInformation_01": "123 Buyer Street"
-                                                  }
-                                                },
-                                                "N4": {
-                                                  "N4": {
-                                                    "CityName_01": "Helsinki",
-                                                    "StateorProvinceCode_02": "Uusimaa",
-                                                    "PostalCode_03": "00100",
-                                                    "CountryCode_04": "FI"
-                                                  }
-                                                }
-                                              },
-                                              {
-                                                "N1": {
-                                                  "EntityIdentifierCode_01": "ST",
-                                                  "Name_02": "Supplier Warehouse",
-                                                  "IdentificationCodeQualifier_03": "92",
-                                                  "IdentificationCode_04": "98765"
-                                                },
-                                                "N3": {
-                                                  "N3": {
-                                                    "AddressInformation_01": "987 Supplier Road"
-                                                  }
-                                                },
-                                                "N4": {
-                                                  "N4": {
-                                                    "CityName_01": "Tampere",
-                                                    "StateorProvinceCode_02": "Pirkanmaa",
-                                                    "PostalCode_03": "33100",
-                                                    "CountryCode_04": "FI"
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          },
-                                          "PO1Loop": {
-                                            "Loop_PO1_850": [
-                                              {
-                                                "PO1": {
-                                                  "AssignedIdentification_01": "1",
-                                                  "QuantityOrdered_02": "10",
-                                                  "UnitorBasisforMeasurementCode_03": "EA",
-                                                  "UnitPrice_04": "15.00",
-                                                  "ProductServiceIDQualifier_06": "BP",
-                                                  "ProductServiceID_07": "ABC123",
-                                                  "ProductServiceIDQualifier_08": "VP",
-                                                  "ProductServiceID_09": "XYZ789"
-                                                },
-                                                "PIDLoop": {
-                                                  "Loop_PID_850": {
-                                                    "PID": {
-                                                      "ItemDescriptionType_01": "F",
-                                                      "Description_05": "Widget Model X"
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              {
-                                                "PO1": {
-                                                  "AssignedIdentification_01": "2",
-                                                  "QuantityOrdered_02": "5",
-                                                  "UnitorBasisforMeasurementCode_03": "EA",
-                                                  "UnitPrice_04": "9.50",
-                                                  "ProductServiceIDQualifier_06": "BP",
-                                                  "ProductServiceID_07": "DEF456",
-                                                  "ProductServiceIDQualifier_08": "VP",
-                                                  "ProductServiceID_09": "UVW567"
-                                                },
-                                                "PIDLoop": {
-                                                  "Loop_PID_850": {
-                                                    "PID": {
-                                                      "ItemDescriptionType_01": "F",
-                                                      "Description_05": "Widget Model Y"
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            ]
-                                          },
-                                          "CTTLoop": {
-                                            "CTT": {
-                                              "NumberofLineItems_01": "2"
-                                            }
-                                          },
-                                          "SE": {
-                                            "NumberofIncludedSegments_01": "14",
-                                            "TransactionSetControlNumber_02": "0001"
-                                          }
-                                        },
-                                        "GE": {
-                                          "NumberOfIncludedSets_1": "1",
-                                          "GroupControlNumber_2": "1"
-                                        },
-                                        "IEA": {
-                                          "NumberOfIncludedGroups_1": "1",
-                                          "InterchangeControlNumber_2": "000000001"
-                                        }
-                                      }
-                                    }
-                                    """;
+    private const string CustomErrorMessage = "CustomErrorMesasge";
+    private static readonly string TestDataDir = Path.Combine(AppContext.BaseDirectory, "TestData");
+    private static readonly string SampleJson = File.ReadAllText(Path.Combine(TestDataDir, "sample.json"));
+
+    private static readonly string ExpectedEdi =
+        File.ReadAllText(Path.Combine(TestDataDir, "expected.edi")).Replace("\r\n", string.Empty);
 
     [Test]
-    public void ShouldRepeatContentWithDelimiter()
+    public void Should_Create_EdiFile()
     {
-        var input = new Input { Json = SampleJson };
-        var options = new Options { ThrowErrorOnFailure = true, ErrorMessageOnFailure = null };
-        var result = X12.CreateFromJson(input, options, CancellationToken.None);
-        File.WriteAllText("result.txt", result.Output);
-        Assert.That(result.Output, Is.EqualTo("foobar, foobar, foobar"));
+        var input = DefaultInput();
+        input.Json = SampleJson;
+        var result = X12.CreateFromJson(input, DefaultOptions(), CancellationToken.None);
+        Assert.That(result.Success, Is.True);
+        Assert.That(result.Output, Is.EqualTo(ExpectedEdi));
     }
+
+    [Test]
+    public void Should_Throw_Error_When_Json_Is_Not_Serializable()
+    {
+        var input = DefaultInput();
+        input.Json = "Invalid json";
+        var ex = Assert.Throws<Exception>(() =>
+            X12.CreateFromJson(input, DefaultOptions(), CancellationToken.None));
+        Assert.That(ex, Is.Not.Null);
+    }
+
+    [Test]
+    public void Should_Throw_Error_When_ThrowErrorOnFailure_Is_True()
+    {
+        var input = DefaultInput();
+        input.Json = null;
+        var ex = Assert.Throws<Exception>(() =>
+            X12.CreateFromJson(input, DefaultOptions(), CancellationToken.None));
+        Assert.That(ex, Is.Not.Null);
+    }
+
+    [Test]
+    public void Should_Return_Failed_Result_When_ThrowErrorOnFailure_Is_False()
+    {
+        var input = DefaultInput();
+        input.Json = null;
+        var options = DefaultOptions();
+        options.ThrowErrorOnFailure = false;
+        var result = X12.CreateFromJson(input, options, CancellationToken.None);
+        Assert.That(result.Success, Is.False);
+    }
+
+    [Test]
+    public void Should_Use_Custom_ErrorMessageOnFailure()
+    {
+        var input = DefaultInput();
+        input.Json = null;
+        var options = DefaultOptions();
+        options.ErrorMessageOnFailure = CustomErrorMessage;
+        var ex = Assert.Throws<Exception>(() =>
+            X12.CreateFromJson(input, options, CancellationToken.None));
+        Assert.That(ex, Is.Not.Null);
+        Assert.That(ex.Message, Contains.Substring(CustomErrorMessage));
+    }
+
+    private static Input DefaultInput() => new()
+    {
+        Json = SampleJson,
+    };
+
+    private static Options DefaultOptions() => new()
+    {
+        ThrowErrorOnFailure = true,
+        ErrorMessageOnFailure = string.Empty,
+    };
 }
