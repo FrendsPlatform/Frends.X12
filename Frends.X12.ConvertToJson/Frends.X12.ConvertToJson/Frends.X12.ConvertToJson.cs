@@ -25,7 +25,7 @@ namespace Frends.X12.ConvertToJson;
 public static class X12
 {
     /// <summary>
-    /// Converts Json into X12 Edi string.
+    /// Converts X12 Edi string to Json.
     /// [Documentation](https://tasks.frends.com/tasks/frends-tasks/Frends-X12-ConvertToJson)
     /// </summary>
     /// <param name="input">Essential parameters.</param>

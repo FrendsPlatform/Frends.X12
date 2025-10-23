@@ -36,6 +36,8 @@
         <AdditionalFiles Include="FrendsTaskMetadata.json" Pack="true" PackagePath="/">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </AdditionalFiles>
+        <Content Include="migration.json" PackagePath="/" Pack="true" />
+        <Content Include="../CHANGELOG.md" PackagePath="/" Pack="true" />
     </ItemGroup>
 
 </Project>

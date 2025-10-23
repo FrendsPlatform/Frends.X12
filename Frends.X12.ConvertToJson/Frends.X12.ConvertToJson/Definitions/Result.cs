@@ -12,11 +12,11 @@ public class Result
     public bool Success { get; set; }
 
     /// <summary>
-    /// Result of converting Edifact to Json.
+    /// Result of converting X12 Edi string to Json.
     /// </summary>
     /// <example>
     /// {
-    ///     "Edifact": {
+    ///     "X12": {
     ///         "UNB": { ... }
     ///         "TSINVOIC": { ... }
     ///         "UNZ": { ... }

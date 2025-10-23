@@ -8,7 +8,7 @@ Frends task for converting X12 documents to JSON.
 
 ## Installing
 
-You can install the Task via frends UI Task View.
+You can install the Task via Frends UI Task View.
 
 ## Building
 
@@ -30,7 +30,7 @@ Run the tests
 
 `dotnet pack --configuration Release`
 
-### Third party licenses
+### Third-party licenses
 
 StyleCop.Analyzer version (unmodified version 1.1.118) used to analyze code uses Apache-2.0 license, full text and
 source code can be found at https://github.com/DotNetAnalyzers/StyleCopAnalyzers
