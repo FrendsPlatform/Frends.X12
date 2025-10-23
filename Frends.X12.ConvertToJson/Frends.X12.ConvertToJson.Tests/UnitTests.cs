@@ -9,7 +9,7 @@ namespace Frends.X12.ConvertToJson.Tests;
 [TestFixture]
 public class UnitTests
 {
-    private const string CustomErrorMessage = "CustomErrorMessage";
+    private const string CustomErrorMessage = "TestErrorMessage";
     private static readonly string TestDataDir = Path.Combine(AppContext.BaseDirectory, "TestData");
     private static readonly string SampleEdi = File.ReadAllText(Path.Combine(TestDataDir, "sample.edi"));
 
