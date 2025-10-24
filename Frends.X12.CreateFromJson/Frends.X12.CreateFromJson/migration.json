@@ -1,0 +1,12 @@
+﻿[
+  {
+    "Task": "Frends.X12.CreateFromJson",
+    "Migrations": [
+      {
+        "Version": "1.0.0",
+        "Description": "",
+        "Migration": []
+      }
+    ]
+  }
+]
